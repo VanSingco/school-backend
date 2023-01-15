@@ -20,7 +20,9 @@ return new class extends Migration
             $table->string('last_name');
             $table->string('middle_name');
             $table->string('suffix_name')->nullable();
-            $table->string('contact_no')->nullable();
+            $table->string('contact_no');
+            $table->string('email');
+            $table->string('major');
             $table->string('picture')->nullable();
             $table->enum('gender', ['male', 'female'])->nullable();
             $table->date('birth_date')->nullable();

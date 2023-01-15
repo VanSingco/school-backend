@@ -52,7 +52,7 @@ class TeacherService {
         ]);
         // store user id to teacher table
         $teacherData['user_id'] = $user->id;
-
+        $teacherData['is_active'] =  $data->is_active == 'true' ? true : false;
         // upload techer picture
         if ($data->hasFile('picture') && $data->file('picture')) {
             $teacherData['picture'] = $this->uploadService->upload($data->file('picture'), '/teachers/picture');

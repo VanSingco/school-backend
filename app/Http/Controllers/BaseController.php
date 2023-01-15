@@ -6,33 +6,20 @@ use Illuminate\Http\Request;
 
 class BaseController extends Controller
 {
-    public function getRegion()
+    public function getRegionProvinceCityBrgy()
     {
-        $path = storage_path('/app') . "/json/refregion.json";
-        
-        return json_decode(file_get_contents($path), true);
+        $region = json_decode(file_get_contents(storage_path('/app') . "/json/refregion.json"), true);
+        $province = json_decode(file_get_contents(storage_path('/app') . "/json/refprovince.json"), true);
+        $city = json_decode(file_get_contents(storage_path('/app') . "/json/refcitymun.json"), true);
+        $barangay = json_decode(file_get_contents(storage_path('/app') . "/json/refbrgy.json"), true);
+
+
+        return response()->json([
+            'region' => $region['RECORDS'],
+            'province' => $province['RECORDS'],
+            'city' => $city["RECORDS"],
+            'barangay' => $barangay['RECORDS'],
+        ], 200);
     }
-
-    public function getProvince()
-    {
-        $path = storage_path('/app') . "/json/refprovince.json";
-
-        return json_decode(file_get_contents($path), true);
-    }
-
-    public function getCity()
-    {
-        $path = storage_path('/app') . "/json/refcitymun.json";
-
-        return json_decode(file_get_contents($path), true);
-    }
-
-    public function getBarangay()
-    {
-        $path = storage_path('/app') . "/json/refbrgy.json";
-
-        return json_decode(file_get_contents($path), true);
-    }
-
     
 }

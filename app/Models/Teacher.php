@@ -19,6 +19,8 @@ class Teacher extends Model
         'middle_name',
         'suffix_name',
         'contact_no',
+        'email',
+        'major',
         'picture',
         'gender',
         'birth_date',

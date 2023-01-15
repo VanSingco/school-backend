@@ -6,6 +6,7 @@ use App\Http\Controllers\GradeLevelController;
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\SchoolYearController;
 use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\TeacherController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -33,12 +34,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::resource('grade-levels', GradeLevelController::class);
     Route::resource('school-years', SchoolYearController::class);
     Route::resource('schools', SchoolController::class);
+    Route::resource('teachers', TeacherController::class);
 
     Route::prefix('country-data')->group(function () {
-        Route::get('region', [BaseController::class, 'getRegion']);
-        Route::get('province', [BaseController::class, 'getProvince']);
-        Route::get('city', [BaseController::class, 'getCity']);
-        Route::get('barangay', [BaseController::class, 'getBarangay']);
+        Route::get('region-province-city-brgy', [BaseController::class, 'getRegionProvinceCityBrgy']);
     });
 
 
