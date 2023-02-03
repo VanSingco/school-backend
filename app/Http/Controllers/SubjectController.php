@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\SubjectAction\SubjectCreate;
+use App\Actions\SubjectAction\SubjectDelete;
+use App\Actions\SubjectAction\SubjectList;
+use App\Actions\SubjectAction\SubjectShow;
+use App\Actions\SubjectAction\SubjectUpdate;
 use App\Http\Requests\SubjectRequest;
 use App\Models\Subject;
 use App\Services\SubjectService;
@@ -9,18 +14,13 @@ use Illuminate\Http\Request;
 
 class SubjectController extends Controller
 {
-    protected $subjectService;
-    
-    public function __construct(SubjectService $subjectService) {
-        $this->subjectService = $subjectService;
-    }
     
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
-        return response()->json($this->subjectService->list($request), 200);
+        return response()->json(SubjectList::run($request), 200);
     }
 
 
@@ -29,7 +29,7 @@ class SubjectController extends Controller
      */
     public function store(SubjectRequest $request)
     {
-        return response()->json($this->subjectService->store($request), 200);
+        return response()->json(SubjectCreate::run($request), 200);
     }
 
     /**
@@ -37,7 +37,7 @@ class SubjectController extends Controller
      */
     public function show($id)
     {
-        return response()->json($this->subjectService->show($id), 200);
+        return response()->json(SubjectShow::run($id), 200);
     }
 
     /**
@@ -45,14 +45,14 @@ class SubjectController extends Controller
      */
     public function update(SubjectRequest $request, $id)
     {
-        return response()->json($this->subjectService->update($id, $request), 200);
+        return response()->json(SubjectUpdate::run($id, $request), 200);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        return response()->json($this->subjectService->delete($id, $request), 200);
+        return response()->json(SubjectDelete::run($id), 200);
     }
 }

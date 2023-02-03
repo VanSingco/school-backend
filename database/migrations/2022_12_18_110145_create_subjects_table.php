@@ -14,7 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('subjects', function (Blueprint $table) {
-            $table->uuid('id');
+            $table->uuid('id')->primary();
+            $table->string('school_id');
             $table->string('name');
             $table->enum('type', ['minor', 'major']);
             $table->string('parent_subject_id')->nullable();

@@ -13,6 +13,7 @@ class Family extends Model
     use HasFactory, HasUuids, SoftDeletes, Searchable;
 
     protected $fillable = [
+        'school_id',
         'user_id',
         'primary_contact_person',
         'primary_contact_number',
@@ -43,4 +44,9 @@ class Family extends Model
         'guardian_highest_education_attaiment',
         'is_active',
     ];
+
+    public function school()
+    {
+        return $this->belongsTo(School::class);
+    }
 }

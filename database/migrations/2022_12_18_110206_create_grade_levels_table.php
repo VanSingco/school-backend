@@ -14,7 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('grade_levels', function (Blueprint $table) {
-            $table->uuid('id');
+            $table->uuid('id')->primary();
+            $table->string('school_id');
             $table->string('name');
             $table->softDeletes();
             $table->timestamps();

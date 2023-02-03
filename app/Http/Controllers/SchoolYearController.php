@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\SchoolYearAction\SchoolYearCreate;
+use App\Actions\SchoolYearAction\SchoolYearDelete;
+use App\Actions\SchoolYearAction\SchoolYearList;
+use App\Actions\SchoolYearAction\SchoolYearShow;
+use App\Actions\SchoolYearAction\SchoolYearUpdate;
 use App\Http\Requests\SchoolYearRequest;
 use App\Services\SchoolYearService;
 use Illuminate\Http\Request;
@@ -9,15 +14,12 @@ use Illuminate\Http\Request;
 class SchoolYearController extends Controller
 {
 
-    public function __construct(SchoolYearService $schoolYearService) {
-        $this->schoolYearService = $schoolYearService;
-    }
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request) 
     {
-       return response()->json($this->schoolYearService->list($request), 200);
+       return response()->json(SchoolYearList::run($request), 200);
     }
 
     /**
@@ -25,7 +27,7 @@ class SchoolYearController extends Controller
      */
     public function store(SchoolYearRequest $request)
     {
-        return response()->json($this->schoolYearService->store($request), 200);
+        return response()->json(SchoolYearCreate::run($request), 200);
     }
 
     /**
@@ -33,7 +35,7 @@ class SchoolYearController extends Controller
      */
     public function show($id)
     {
-        return response()->json($this->schoolYearService->show($id), 200);
+        return response()->json(SchoolYearShow::run($id), 200);
     }
 
     /**
@@ -41,7 +43,7 @@ class SchoolYearController extends Controller
      */
     public function update(SchoolYearRequest $request, $id)
     {
-        return response()->json($this->schoolYearService->update($id, $request), 200);
+        return response()->json(SchoolYearUpdate::run($id, $request), 200);
     }
 
     /**
@@ -49,6 +51,6 @@ class SchoolYearController extends Controller
      */
     public function destroy($id)
     {
-        return response()->json($this->schoolYearService->delete($id), 200);
+        return response()->json(SchoolYearDelete::run($id), 200);
     }
 }

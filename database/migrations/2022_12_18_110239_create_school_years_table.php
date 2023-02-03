@@ -14,7 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('school_years', function (Blueprint $table) {
-            $table->uuid('id');
+            $table->uuid('id')->primary();
+            $table->string('school_id');
             $table->string('from');
             $table->string('to');
             $table->string('school_year');

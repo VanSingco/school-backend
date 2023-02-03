@@ -14,10 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('students', function (Blueprint $table) {
-            $table->uuid('id');
+            $table->uuid('id')->primary();
             $table->string('user_id');
+            $table->string('school_id');
             $table->string('lrn')->nullable();
-            $table->integer('number')->nullable();
+            $table->bigInteger('number')->nullable();
             $table->string('first_name');
             $table->string('last_name');
             $table->string('middle_name');
@@ -39,13 +40,14 @@ return new class extends Migration
             $table->string('status');
             $table->string('type');
             $table->enum('payment_options', ['fullpayment', 'semi-annual', 'quarterly', 'monthly'])->defaults('quarterly');
-            $table->integer('grade_level_id');
-            $table->integer('last_grade_level_id')->nullable();
-            $table->integer('schoo_year_id');
-            $table->integer('last_schoo_year_id')->nullable();
+            $table->string('grade_level_id');
+            $table->string('last_grade_level_id')->nullable();
+            $table->string('schoo_year_id');
+            $table->string('last_schoo_year_id')->nullable();
             $table->string('primary_contact_person')->nullable();
             $table->string('primary_contact_no')->nullable();
             $table->string('primary_contact_relationship')->nullable();
+            $table->boolean('is_active')->default(true);
             $table->softDeletes();
             $table->timestamps();
         });

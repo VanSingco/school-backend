@@ -13,6 +13,12 @@ class GradeLevel extends Model
     use HasFactory, HasUuids, SoftDeletes, Searchable;
 
     protected $fillable = [
+        'school_id',
         'name'
     ];
+
+    public function school()
+    {
+        return $this->belongsTo(School::class);
+    }
 }

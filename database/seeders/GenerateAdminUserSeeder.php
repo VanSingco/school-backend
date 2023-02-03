@@ -20,7 +20,7 @@ class GenerateAdminUserSeeder extends Seeder
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
             'password' => Hash::make('password12345'),
-            'user_type' => 'admin',
+            'user_type' => 'super-admin',
         ]);
     }
 }

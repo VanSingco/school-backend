@@ -13,9 +13,10 @@ class Student extends Model
     use HasFactory, HasUuids, SoftDeletes, Searchable;
 
     protected $fillable = [
+        'school_id',
         'user_id',
         'lrn',
-        'numbers',
+        'number',
         'first_name',
         'last_name',
         'middle_name',
@@ -45,4 +46,20 @@ class Student extends Model
         'primary_contact_no',
         'primary_contact_relationship',
     ];
+
+    public function gradeLevel()
+    {
+       return $this->belongsTo(GradeLevel::class);
+    }
+
+    public function schoolYear()
+    {
+       return $this->belongsTo(SchoolYear::class);
+    }
+
+    public function school()
+    {
+        return $this->belongsTo(School::class);
+    }
+    
 }

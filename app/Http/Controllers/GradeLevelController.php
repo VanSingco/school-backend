@@ -2,21 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\GradeLevelAction\GradeLevelCreate;
+use App\Actions\GradeLevelAction\GradeLevelDelete;
+use App\Actions\GradeLevelAction\GradeLevelList;
+use App\Actions\GradeLevelAction\GradeLevelShow;
+use App\Actions\GradeLevelAction\GradeLevelUpdate;
 use App\Models\GradeLevel;
 use App\Services\GradeLevelService;
 use Illuminate\Http\Request;
 
 class GradeLevelController extends Controller
 {
-    public function __construct(GradeLevelService $gradeLevelService) {
-        $this->gradeLevelService = $gradeLevelService;
-    }
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request) 
     {
-       return response()->json($this->gradeLevelService->list($request), 200);
+       return response()->json(GradeLevelList::run($request), 200);
     }
 
     /**
@@ -24,7 +26,7 @@ class GradeLevelController extends Controller
      */
     public function store(Request $request)
     {
-        return response()->json($this->gradeLevelService->store($request), 200);
+        return response()->json(GradeLevelCreate::run($request), 200);
     }
 
     /**
@@ -32,7 +34,7 @@ class GradeLevelController extends Controller
      */
     public function show($id)
     {
-        return response()->json($this->gradeLevelService->show($id), 200);
+        return response()->json(GradeLevelShow::run($id), 200);
     }
 
     /**
@@ -40,7 +42,7 @@ class GradeLevelController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return response()->json($this->gradeLevelService->update($id, $request), 200);
+        return response()->json(GradeLevelUpdate::run($id, $request), 200);
     }
 
     /**
@@ -48,6 +50,6 @@ class GradeLevelController extends Controller
      */
     public function destroy($id)
     {
-        return response()->json($this->gradeLevelService->delete($id), 200);
+        return response()->json(GradeLevelDelete::run($id), 200);
     }
 }

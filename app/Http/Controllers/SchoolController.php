@@ -2,33 +2,31 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\School;
+use App\Actions\SchoolAction\School as SchoolActionSchool;
+use App\Actions\SchoolAction\SchoolCreate;
+use App\Actions\SchoolAction\SchoolDelete;
+use App\Actions\SchoolAction\SchoolList;
+use App\Actions\SchoolAction\SchoolUpdate;
+use App\Http\Requests\SchoolRequest;
 use App\Services\SchoolService;
 use Illuminate\Http\Request;
 
 class SchoolController extends Controller
 {
-    
-    public function __construct(SchoolService $schoolService) {
-        $this->schoolService = $schoolService;
-    }
-    
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
     {
-        return response()->json($this->schoolService->list($request), 200);
+        return response()->json(SchoolList::run($request), 200);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(SchoolRequest $request)
     {
-        return response()->json($this->schoolService->store($request), 200);
+        return response()->json(SchoolCreate::run($request), 200);
     }
 
     /**
@@ -36,16 +34,16 @@ class SchoolController extends Controller
      */
     public function show($id)
     {
-        return response()->json($this->schoolService->show($id), 200);
+        return response()->json(SchoolActionSchool::run('id', $id), 200);
     }
 
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(SchoolRequest $request, $id)
     {
-        return response()->json($this->schoolService->update($id, $request), 200);
+        return response()->json(SchoolUpdate::run($id, $request), 200);
     }
 
     /**
@@ -53,6 +51,12 @@ class SchoolController extends Controller
      */
     public function destroy($id)
     {
-        return response()->json($this->schoolService->delete($id), 200);
+        return response()->json(SchoolDelete::run($id), 200);
+    }
+
+
+    public function getSchoolBySubdomain($subdomain)
+    {
+        return response()->json(SchoolActionSchool::run('subdomain', $subdomain), 200);
     }
 }

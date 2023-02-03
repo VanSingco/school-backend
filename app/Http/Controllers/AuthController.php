@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\UserAction\UserLogin;
+use App\Models\School;
 use App\Models\User;
 use App\Services\AuthService;
 use Illuminate\Http\Request;
@@ -11,13 +13,6 @@ use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
-    protected $authService;
-    
-    function __construct(AuthService $authService)
-    {
-        $this->authService = $authService;
-    }
-    
     // This will login the user with token
     public function login(Request $request)
     {
@@ -25,13 +20,21 @@ class AuthController extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ]);
+        
 
         $user = User::where('email', $validated['email'])->first();
 
         if ($user) {
+            
+            $school = School::where('subdomain', $request->subdomain)->first();
+
             if ($user->user_type == 'super-admin') {
                 throw ValidationException::withMessages([
                     'no_permission' => ["You don't have permission to login to this portal."],
+                ]);
+            } else if ($user->school_id !== $school->id) {
+                throw ValidationException::withMessages([
+                    'no_permission' => ["You don't have permission to login to this school portal."],
                 ]);
             }
         } else {
@@ -40,9 +43,9 @@ class AuthController extends Controller
             ]);
         }
 
-        $token = $this->authService->login($validated);
+        $token = UserLogin::run($validated,  $user);
 
-        return response()->json($token, 200);
+        return response()->json(['user' => $user, 'token' => $token], 200);
     }
 
 
@@ -67,9 +70,9 @@ class AuthController extends Controller
             ]);
         }
 
-        $token = $this->authService->login($validated);
+        $token = UserLogin::run($validated,  $user);
 
-        return response()->json($token, 200);
+        return response()->json(['user' => $user, 'token' => $token], 200);
     }
 
     // This will get the current user

@@ -13,9 +13,15 @@ class SchoolYear extends Model
     use HasFactory, HasUuids, SoftDeletes, Searchable;
 
     protected $fillable = [
+        'school_id',
         'from',
         'to',
         'school_year',
         'is_active',
     ];
+
+    public function school()
+    {
+        return $this->belongsTo(School::class);
+    }
 }

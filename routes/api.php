@@ -1,13 +1,16 @@
 <?php
 
+use App\Http\Controllers\AssignSubjectController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BaseController;
 use App\Http\Controllers\GradeLevelController;
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\SchoolYearController;
+use App\Http\Controllers\SectionController;
+use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TeacherController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,7 +29,10 @@ Route::prefix('auth')->group(function () {
     Route::post('super-admin-login', [AuthController::class, 'superAdminLogin']);
 });
 
-Route::middleware('auth:sanctum')->group(function () {
+
+Route::get('schools/subdomain/{subdomain}', [SchoolController::class, 'getSchoolBySubdomain']);
+
+Route::middleware('auth:api')->group(function () {
     Route::get('auth/user', [AuthController::class, 'user']);
     Route::post('auth/logout', [AuthController::class, 'logout']);
 
@@ -35,7 +41,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::resource('school-years', SchoolYearController::class);
     Route::resource('schools', SchoolController::class);
     Route::resource('teachers', TeacherController::class);
-
+    Route::resource('users', UserController::class);
+    Route::resource('students', StudentController::class);
+    Route::resource('sections', SectionController::class);
+    Route::resource('assign-subjects', AssignSubjectController::class);
+    
+    // This will fetch all the region province city and barangay in the philippines
     Route::prefix('country-data')->group(function () {
         Route::get('region-province-city-brgy', [BaseController::class, 'getRegionProvinceCityBrgy']);
     });

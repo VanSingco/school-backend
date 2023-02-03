@@ -13,6 +13,7 @@ class Subject extends Model
     use HasFactory, HasUuids, SoftDeletes, Searchable;
 
     protected $fillable = [
+        'school_id',
         'name',
         'type',
         'parent_subject_id',
@@ -24,6 +25,11 @@ class Subject extends Model
     public function parentSubject()
     {
         return $this->belongsTo(Subject::class, 'parent_subject_id', 'id');
+    }
+
+    public function school()
+    {
+        return $this->belongsTo(School::class);
     }
 
     
