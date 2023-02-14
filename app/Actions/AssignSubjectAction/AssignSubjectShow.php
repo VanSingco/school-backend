@@ -17,6 +17,6 @@ class AssignSubjectShow
 
     public function handle($id)
     {
-        return $this->assignSubject->find($id);
+        return $this->assignSubject->where('id', $id)->with(['subject', 'gradeLevel'])->first();
     }
 }

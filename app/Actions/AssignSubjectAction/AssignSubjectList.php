@@ -33,7 +33,7 @@ class AssignSubjectList
         }
 
         if ($paginate == 'true') {
-            return $model->with(['school', 'teacher', 'gradeLevel', 'subject'])->paginate($perPage);
+            return $model->with(['school', 'gradeLevel', 'subject'])->paginate($perPage);
         } else {
             return $model->get();
         }

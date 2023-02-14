@@ -19,10 +19,12 @@ class AssignSubjectSchedule extends Model
         'assign_subject_id',
         'teacher_id',
         'classroom_name',
-        'day',
-        'time_from',
-        'time_to',
     ];
+
+
+    public function dayTimeSchedules() {
+        return $this->hasMany(AssignSubjectScheduleDayTime::class);
+    }
 
     public function section()
     {

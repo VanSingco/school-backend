@@ -37,7 +37,7 @@ class AssignSubjectScheduleList
         }
 
         if ($paginate == 'true') {
-            return $model->with(['teacher', 'assignSubject', 'section'])->paginate($perPage);
+            return $model->with(['teacher', 'assignSubject', 'section', 'dayTimeSchedules'])->paginate($perPage);
         } else {
             return $model->get();
         }

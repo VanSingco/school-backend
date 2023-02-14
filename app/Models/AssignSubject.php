@@ -29,11 +29,6 @@ class AssignSubject extends Model
         return $this->belongsTo(Subject::class);
     }
 
-    public function teacher()
-    {
-        return $this->belongsTo(Teacher::class);
-    }
-
     public function gradeLevel()
     {
         return $this->belongsTo(GradeLevel::class);

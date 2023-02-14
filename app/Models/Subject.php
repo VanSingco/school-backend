@@ -20,6 +20,12 @@ class Subject extends Model
         'ww',
         'qa',
         'pt',
+        'ww_min_task',
+        'ww_max_task',
+        'qa_min_task',
+        'qa_max_task',
+        'pt_min_task',
+        'pt_max_task',
     ];
 
     public function parentSubject()

@@ -17,6 +17,6 @@ class AssignSubjectScheduleShow
 
     public function handle($id)
     {
-        return $this->assignSubjectSchedule->find($id);
+        return $this->assignSubjectSchedule->where('id', $id)->with(['teacher', 'assignSubject', 'section', 'dayTimeSchedules'])->first();
     }
 }

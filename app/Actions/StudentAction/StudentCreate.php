@@ -34,7 +34,7 @@ class StudentCreate
             'user_type' => 'student',
         ]);
         // generate student number
-        $studentNumber = Carbon::now()->format('Y').str_pad(($this->student->count() + 1), 6, '0', STR_PAD_LEFT);
+        $studentNumber = Carbon::now()->format('Y').str_pad(($this->student->where('school_id', $data->school_id)->count() + 1), 6, '0', STR_PAD_LEFT);
         // store user id to teacher table
         $studentData['user_id'] = $user->id;
         $studentData['number'] = $studentNumber;

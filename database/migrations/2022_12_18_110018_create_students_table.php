@@ -42,8 +42,8 @@ return new class extends Migration
             $table->enum('payment_options', ['fullpayment', 'semi-annual', 'quarterly', 'monthly'])->defaults('quarterly');
             $table->string('grade_level_id');
             $table->string('last_grade_level_id')->nullable();
-            $table->string('schoo_year_id');
-            $table->string('last_schoo_year_id')->nullable();
+            $table->string('school_year_id');
+            $table->string('last_school_year_id')->nullable();
             $table->string('primary_contact_person')->nullable();
             $table->string('primary_contact_no')->nullable();
             $table->string('primary_contact_relationship')->nullable();

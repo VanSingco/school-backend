@@ -15,6 +15,7 @@ class Student extends Model
     protected $fillable = [
         'school_id',
         'user_id',
+        'family_id',
         'lrn',
         'number',
         'first_name',
@@ -40,12 +41,19 @@ class Student extends Model
         'payment_options',
         'grade_level_id',
         'last_grade_level_id',
-        'schoo_year_id',
-        'last_schoo_year_id',
+        'school_year_id',
+        'last_school_year_id',
         'primary_contact_person',
         'primary_contact_no',
         'primary_contact_relationship',
     ];
+
+    protected $appends = ['section'];
+
+    public function getSectionAttribute() {
+        $sectionStudent = SectionStudent::where('student_id', $this->id)->where('school_year_id', $this->school_year_id)->first();
+        return $sectionStudent ? Section::find($sectionStudent->section_id) : null;
+    }
 
     public function gradeLevel()
     {
@@ -55,6 +63,16 @@ class Student extends Model
     public function schoolYear()
     {
        return $this->belongsTo(SchoolYear::class);
+    }
+
+    public function lastGradeLevel()
+    {
+       return $this->belongsTo(GradeLevel::class, 'last_grade_level_id', 'id');
+    }
+
+    public function lastSchoolYear()
+    {
+       return $this->belongsTo(SchoolYear::class, 'last_school_year_id', 'id');
     }
 
     public function school()

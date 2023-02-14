@@ -20,9 +20,6 @@ return new class extends Migration
             $table->string('teacher_id');
             $table->string('section_id');
             $table->string('classroom_name')->nullable();
-            $table->string('day');
-            $table->time('time_from');
-            $table->time('time_to');
             $table->softDeletes();
             $table->timestamps();
         });

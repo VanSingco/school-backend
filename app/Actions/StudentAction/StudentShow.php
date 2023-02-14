@@ -17,6 +17,11 @@ class StudentShow
 
     public function handle($id)
     {
-       return $this->student->find($id);
+       return $this->student->where('id', $id)->with([
+        'gradeLevel', 
+        'schoolYear', 
+        'lastGradeLevel', 
+        'lastSchoolYear', 
+        'school'])->first();
     }
 }

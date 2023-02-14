@@ -17,6 +17,6 @@ class SectionShow
 
     public function handle($id)
     {
-        return $this->section->find($id);
+        return $this->section->where('id', $id)->with(['gradeLevel'])->first();
     }
 }

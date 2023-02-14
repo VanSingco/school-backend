@@ -3,6 +3,7 @@
 namespace App\Actions\SchoolAction;
 
 use App\Actions\CustomAction\Upload;
+use App\Actions\GradeLevelAction\GenerateGradeLevel;
 use App\Models\School;
 use App\Services\UploadService;
 use Lorisleiva\Actions\Concerns\AsAction;
@@ -33,6 +34,8 @@ class SchoolUpdate
         }
 
         $schoolData['subdomain'] = str_replace(" ", "", strtolower($schoolData['name']));
+        // Generate or update grade level belongs to school
+        GenerateGradeLevel::run($schoolData['curricular_offering'], $id);
 
         return $this->school->where('id', $id)->update($schoolData);
     }

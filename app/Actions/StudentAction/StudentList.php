@@ -17,15 +17,19 @@ class StudentList
 
     public function handle($data)
     {
-        return $this->studentList($data->search, $data->orderBy, $data->paginate, $data->school_id);
+        return $this->studentList($data->search, $data->orderBy, $data->paginate, $data->school_id, $data->grade_level_id);
     }
 
-    public function studentList($search='', $orderBy='DESC', $paginate='true', $school_id=null, $perPage=10) 
+    public function studentList($search='', $orderBy='DESC', $paginate='true', $school_id=null, $grade_level_id=null, $perPage=10) 
     {
         $model = $this->student->orderBy('created_at', $orderBy);
 
         if ($school_id != 'null') {
             $model->where('school_id', $school_id);
+        }
+
+        if ($grade_level_id != 'null') {
+            $model->where('grade_level_id', $grade_level_id);
         }
 
         if ($search) {

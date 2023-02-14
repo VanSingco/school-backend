@@ -2,84 +2,53 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Family;
+use App\Actions\FamilyAction\FamilyCreate;
+use App\Actions\FamilyAction\FamilyDelete;
+use App\Actions\FamilyAction\FamilyList;
+use App\Actions\FamilyAction\FamilyShow;
+use App\Actions\FamilyAction\FamilyUpdate;
+use App\Http\Requests\FamilyRequest;
 use Illuminate\Http\Request;
 
 class FamilyController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return response()->json(FamilyList::run($request), 200);
     }
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(FamilyRequest $request)
     {
-        //
+        return response()->json(FamilyCreate::run($request), 200);
     }
 
     /**
      * Display the specified resource.
-     *
-     * @param  \App\Models\Family  $family
-     * @return \Illuminate\Http\Response
      */
-    public function show(Family $family)
+    public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Family  $family
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Family $family)
-    {
-        //
+        return response()->json(FamilyShow::run($id), 200);
     }
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Family  $family
-     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Family $family)
+    public function update(FamilyRequest $request, $id)
     {
-        //
+        return response()->json(FamilyUpdate::run($id, $request), 200);
     }
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Family  $family
-     * @return \Illuminate\Http\Response
      */
-    public function destroy(Family $family)
+    public function destroy($id)
     {
-        //
+        return response()->json(FamilyDelete::run($id), 200);
     }
 }

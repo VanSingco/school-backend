@@ -18,6 +18,7 @@ class School extends Model
         'id_number',
         'name',
         'email',
+        'school_head',
         'contact_no',
         'logo',
         'subdomain',
