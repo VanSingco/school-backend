@@ -22,6 +22,13 @@ class AssignSubjectSchedule extends Model
     ];
 
 
+    protected $appends = ['assign_subject'];
+
+    public function getAssignSubjectAttribute() {
+        return AssignSubject::where('id', $this->assign_subject_id)->with(['gradeLevel', 'subject'])->first();
+    }
+
+
     public function dayTimeSchedules() {
         return $this->hasMany(AssignSubjectScheduleDayTime::class);
     }
@@ -29,11 +36,6 @@ class AssignSubjectSchedule extends Model
     public function section()
     {
         return $this->belongsTo(Section::class);
-    }
-
-    public function assignSubject()
-    {
-        return $this->belongsTo(AssignSubject::class);
     }
 
     public function teacher()

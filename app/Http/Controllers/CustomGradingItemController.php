@@ -2,6 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\CustomGradingItemAction\CustomGradingItemChangeOrder;
+use App\Actions\CustomGradingItemAction\CustomGradingItemCreate;
+use App\Actions\CustomGradingItemAction\CustomGradingItemDelete;
+use App\Actions\CustomGradingItemAction\CustomGradingItemList;
+use App\Actions\CustomGradingItemAction\CustomGradingItemShow;
+use App\Actions\CustomGradingItemAction\CustomGradingItemUpdate;
 use App\Models\CustomGradingItem;
 use Illuminate\Http\Request;
 
@@ -12,74 +18,44 @@ class CustomGradingItemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        return response()->json(CustomGradingItemList::run($request), 200);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        return response()->json(CustomGradingItemCreate::run($request), 200);
     }
 
     /**
      * Display the specified resource.
-     *
-     * @param  \App\Models\CustomGradingItem  $customGradingItem
-     * @return \Illuminate\Http\Response
      */
-    public function show(CustomGradingItem $customGradingItem)
+    public function show($id)
     {
-        //
+        return response()->json(CustomGradingItemShow::run($id), 200);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\CustomGradingItem  $customGradingItem
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(CustomGradingItem $customGradingItem)
+    public function changeOrder(Request $request)
     {
-        //
+        return response()->json(CustomGradingItemChangeOrder::run($request));
     }
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\CustomGradingItem  $customGradingItem
-     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, CustomGradingItem $customGradingItem)
+    public function update(Request $request, $id)
     {
-        //
+        return response()->json(CustomGradingItemUpdate::run($id, $request), 200);
     }
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\CustomGradingItem  $customGradingItem
-     * @return \Illuminate\Http\Response
      */
-    public function destroy(CustomGradingItem $customGradingItem)
+    public function destroy($id)
     {
-        //
+        return response()->json(CustomGradingItemDelete::run($id), 200);
     }
 }

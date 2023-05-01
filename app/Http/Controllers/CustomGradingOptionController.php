@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\CustomGradingOptionAction\CustomGradingOptionCreate;
+use App\Actions\CustomGradingOptionAction\CustomGradingOptionDelete;
+use App\Actions\CustomGradingOptionAction\CustomGradingOptionList;
+use App\Actions\CustomGradingOptionAction\CustomGradingOptionShow;
+use App\Actions\CustomGradingOptionAction\CustomGradingOptionUpdate;
 use App\Models\CustomGradingOption;
 use Illuminate\Http\Request;
 
@@ -9,77 +14,43 @@ class CustomGradingOptionController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        return response()->json(CustomGradingOptionList::run($request), 200);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        return response()->json(CustomGradingOptionCreate::run($request), 200);
     }
 
     /**
      * Display the specified resource.
-     *
-     * @param  \App\Models\CustomGradingOption  $customGradingOption
-     * @return \Illuminate\Http\Response
      */
-    public function show(CustomGradingOption $customGradingOption)
+    public function show($id)
     {
-        //
+        return response()->json(CustomGradingOptionShow::run($id), 200);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\CustomGradingOption  $customGradingOption
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(CustomGradingOption $customGradingOption)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\CustomGradingOption  $customGradingOption
-     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, CustomGradingOption $customGradingOption)
+    public function update(Request $request, $id)
     {
-        //
+        return response()->json(CustomGradingOptionUpdate::run($id, $request), 200);
     }
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\CustomGradingOption  $customGradingOption
-     * @return \Illuminate\Http\Response
      */
-    public function destroy(CustomGradingOption $customGradingOption)
+    public function destroy($id)
     {
-        //
+        return response()->json(CustomGradingOptionDelete::run($id), 200);
     }
 }

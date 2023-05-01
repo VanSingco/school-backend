@@ -10,6 +10,8 @@ use App\Http\Controllers\CustomGradingOptionController;
 use App\Http\Controllers\CustomGradingStudentController;
 use App\Http\Controllers\FamilyController;
 use App\Http\Controllers\GradeLevelController;
+use App\Http\Controllers\LessonController;
+use App\Http\Controllers\LessonDiscussionController;
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\SchoolYearController;
 use App\Http\Controllers\SectionController;
@@ -60,6 +62,11 @@ Route::middleware('auth:api')->group(function () {
     Route::resource('custom-grading-items', CustomGradingItemController::class);
     Route::resource('custom-grading-options', CustomGradingOptionController::class);
     Route::resource('custom-grading-students', CustomGradingStudentController::class);
+
+    Route::resource('lessons', LessonController::class);
+    Route::resource('lesson-discussions', LessonDiscussionController::class);
+
+    Route::post('custom-grading-items/change-order', [CustomGradingItemController::class, 'changeOrder']);
     
     // This will fetch all the region province city and barangay in the philippines
     Route::prefix('country-data')->group(function () {

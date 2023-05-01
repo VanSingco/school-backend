@@ -17,6 +17,8 @@ class CustomGradingItemUpdate
 
     public function handle($id, $data)
     {
-        return $this->customGradingItem->where('id', $id)->update($data->all());
+        $this->customGradingItem->where('id', $id)->update($data->all());
+
+        return $this->customGradingItem->find($id);
     }
 }

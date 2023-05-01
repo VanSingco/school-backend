@@ -18,6 +18,17 @@ class CustomGradingItemCreate
 
     public function handle($data)
     {
-        return $this->customGradingItem->create($data->all());
+        $customGradingItemData = $data->all();
+
+        $customGradingItem = $this->customGradingItem
+                                ->where('custom_grading_id', $customGradingItemData['custom_grading_id'])
+                                ->orderBy('order', 'DESC')
+                                ->first();
+                                
+        if ($customGradingItem) {
+            $customGradingItemData['order'] = $customGradingItem->order + 1;
+        }
+
+        return $this->customGradingItem->create($customGradingItemData);
     }
 }
