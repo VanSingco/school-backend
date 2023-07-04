@@ -23,4 +23,13 @@ class LessonDiscussionFile extends Model
     {
         return $this->belongsTo(School::class);
     }
+
+    public function lesson() 
+    {
+        return $this->belongsTo(Lesson::class);
+    }
+
+    public function lessonDiscussion() {
+        return $this->belongsTo(LessonDiscussion::class);
+    }
 }

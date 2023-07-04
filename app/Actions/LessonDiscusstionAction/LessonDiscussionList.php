@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Actions\LessonDiscussionDiscusstionAction;
+namespace App\Actions\LessonDiscusstionAction;
 
 use App\Models\LessonDiscussion;
 use Lorisleiva\Actions\Concerns\AsAction;
 
-class LessonDiscussionDiscussionList
+class LessonDiscussionList
 {
     use AsAction;
 
@@ -18,26 +18,17 @@ class LessonDiscussionDiscussionList
 
     public function handle($data)
     {
-        return $this->lessonDiscussionList($data->search, $data->orderBy, $data->paginate, $data->school_id);
+        return $this->lessonDiscussionList($data->lesson_id);
     }
 
-    public function lessonDiscussionList($search='', $orderBy='DESC', $paginate='true', $school_id=null, $perPage=10) 
+    public function lessonDiscussionList($lesson_id) 
     {
         
-        $model = $this->lessonDiscussion->orderBy('created_at', $orderBy);
+        return $this->lessonDiscussion
+                    ->where('lesson_id', $lesson_id)
+                    ->orderBy('order', 'asc')
+                    ->get()
+                    ->groupBy('quarter');
 
-        if ($school_id != 'null') {
-            $model->where('school_id', $school_id);
-        }
-
-        if ($search) {
-            $model->search($search);
-        }
-
-        if ($paginate == 'true') {
-            return $model->with(['school'])->paginate($perPage);
-        } else {
-            return $model->get();
-        }
     }
 }

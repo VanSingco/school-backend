@@ -21,6 +21,8 @@ class LessonDiscussionQuestion extends Model
         'choices',
         'correct_answer',
         'points',
+        'order',
+        'teacher_check'
     ];
 
     public function school()

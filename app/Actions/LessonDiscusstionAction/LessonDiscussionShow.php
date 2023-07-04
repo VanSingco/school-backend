@@ -18,6 +18,6 @@ class LessonDiscussionShow
 
     public function handle($id)
     {
-       return $this->lessonDiscussion->where('id', $id)->with(['school'])->first();
+       return $this->lessonDiscussion->where('id', $id)->with(['school', 'files'])->first();
     }
 }

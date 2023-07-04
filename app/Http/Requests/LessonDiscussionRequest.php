@@ -26,7 +26,6 @@ class LessonDiscussionRequest extends FormRequest
     public function rules()
     {
         return [
-            'school_id' => 'required|string',
             'lesson_id' => 'required|string',
             'title' => 'required|string',
             'description' => 'required|string',

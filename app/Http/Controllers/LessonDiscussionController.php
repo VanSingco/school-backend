@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\LessonDiscussionDiscusstionAction\ListLessonDiscussion;
 use App\Actions\LessonDiscusstionAction\LessonDiscussionCreate;
 use App\Actions\LessonDiscusstionAction\LessonDiscussionDelete;
+use App\Actions\LessonDiscusstionAction\LessonDiscussionList;
 use App\Actions\LessonDiscusstionAction\LessonDiscussionShow;
 use App\Actions\LessonDiscusstionAction\LessonDiscussionUpdate;
 use App\Http\Requests\LessonDiscussionRequest;
@@ -17,7 +19,7 @@ class LessonDiscussionController extends Controller
      */
     public function index(Request $request)
     {
-        return response()->json(LessonDiscussion::run($request), 200);
+        return response()->json(LessonDiscussionList::run($request), 200);
     }
 
     /**

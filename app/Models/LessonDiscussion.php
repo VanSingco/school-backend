@@ -23,11 +23,16 @@ class LessonDiscussion extends Model
         'is_active',
         'has_exam',
         'exam_attempt',
-        'exam_time'
+        'exam_time',
+        'order',
     ];
 
     public function school()
     {
         return $this->belongsTo(School::class);
+    }
+
+    public function files() {
+        return $this->hasMany(LessonDiscussionFile::class);
     }
 }
