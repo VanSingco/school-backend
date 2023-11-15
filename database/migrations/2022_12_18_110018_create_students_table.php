@@ -39,7 +39,7 @@ return new class extends Migration
             $table->string('zipcode')->nullable();
             $table->string('status');
             $table->string('type');
-            $table->enum('payment_options', ['fullpayment', 'semi-annual', 'quarterly', 'monthly'])->defaults('quarterly');
+            $table->string('payment_options')->defaults('quarterly');
             $table->string('grade_level_id');
             $table->string('last_grade_level_id')->nullable();
             $table->string('school_year_id');

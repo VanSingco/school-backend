@@ -20,17 +20,17 @@ class FamilyCreate
 
     public function handle($data)
     {
-        $familyData = $data->all();
+        $family_data = $data->all();
 
         $user = $this->user->create([
-            'name' => $familyData['primary_contact_person'],
-            'email' => $familyData['primary_contact_email'],
-            'password' => Hash::make($familyData['primary_contact_number']),
+            'name' => $family_data['primary_contact_person'],
+            'email' => $family_data['primary_contact_email'],
+            'password' => Hash::make($family_data['primary_contact_number']),
             'user_type' => 'family'
         ]);
 
-        $familyData['user_id'] = $user->id;
+        $family_data['user_id'] = $user->id;
 
-        return $this->family->create($familyData);
+        return $this->family->create($family_data);
     }
 }

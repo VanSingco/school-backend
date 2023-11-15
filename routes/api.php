@@ -38,17 +38,11 @@ Route::prefix('auth')->group(function () {
     Route::post('super-admin-login', [AuthController::class, 'superAdminLogin']);
 });
 
-
-Route::get('schools/subdomain/{subdomain}', [SchoolController::class, 'getSchoolBySubdomain']);
-
 Route::middleware('auth:api')->group(function () {
     Route::get('auth/user', [AuthController::class, 'user']);
     Route::post('auth/logout', [AuthController::class, 'logout']);
 
     Route::resource('subjects', SubjectController::class);
-    Route::resource('grade-levels', GradeLevelController::class);
-    Route::resource('school-years', SchoolYearController::class);
-    Route::resource('schools', SchoolController::class);
     Route::resource('teachers', TeacherController::class);
     Route::resource('users', UserController::class);
     Route::resource('students', StudentController::class);
@@ -67,11 +61,16 @@ Route::middleware('auth:api')->group(function () {
     Route::resource('lesson-discussions', LessonDiscussionController::class);
 
     Route::post('custom-grading-items/change-order', [CustomGradingItemController::class, 'changeOrder']);
-    
-    // This will fetch all the region province city and barangay in the philippines
-    Route::prefix('country-data')->group(function () {
-        Route::get('region-province-city-brgy', [BaseController::class, 'getRegionProvinceCityBrgy']);
-    });
-
-
 });
+
+
+Route::get('fetch-all-configurations', [BaseController::class, 'getConfiguration']);
+// This will fetch all the region province city and barangay in the philippines
+Route::prefix('country-data')->group(function () {
+    Route::get('region-province-city-brgy', [BaseController::class, 'getRegionProvinceCityBrgy']);
+});
+
+Route::get('schools/subdomain/{subdomain}', [SchoolController::class, 'getSchoolBySubdomain']);
+Route::resource('grade-levels', GradeLevelController::class);
+Route::resource('school-years', SchoolYearController::class);
+Route::resource('schools', SchoolController::class);

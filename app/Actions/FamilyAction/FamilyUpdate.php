@@ -22,17 +22,17 @@ class FamilyUpdate
     public function handle($id, $data)
     {
 
-        $familyData = $data->all();
+        $family_data = $data->all();
 
         $family = $this->family->find($id);
 
         $this->user->where('id', $family->user_id)->update([
-            'name' => $familyData['primary_contact_person'],
-            'email' => $familyData['primary_contact_email'],
-            'password' => Hash::make($familyData['primary_contact_number']),
+            'name' => $family_data['primary_contact_person'],
+            'email' => $family_data['primary_contact_email'],
+            'password' => Hash::make($family_data['primary_contact_number']),
             'user_type' => 'family'
         ]);
 
-        return $this->family->where('id', $id)->update($familyData);
+        return $this->family->where('id', $id)->update($family_data);
     }
 }
