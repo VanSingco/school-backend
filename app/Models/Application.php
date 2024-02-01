@@ -12,6 +12,9 @@ class Application extends Model
 {
     use HasFactory, HasUuids, SoftDeletes, Searchable;
 
+    
+    
+
     protected $fillable = [
         'email',
         'tracking_code',

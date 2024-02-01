@@ -18,4 +18,7 @@ class ApplicationFamily extends Model
         'school_year_id',
     ];
 
+
+    
+
 }

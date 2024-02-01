@@ -19,6 +19,8 @@ class AssignSubject extends Model
         'order'
     ];
 
+    
+
     public function school()
     {
         return $this->belongsTo(School::class);
